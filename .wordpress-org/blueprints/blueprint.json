@@ -1,0 +1,42 @@
+{
+    "landingPage": "\/wp-admin\/admin.php?page=say_what_admin",
+    "preferredVersions": {
+        "php": "8.0",
+        "wp": "latest"
+    },
+    "phpExtensionBundles": [
+        "kitchen-sink"
+    ],
+    "features": {
+        "networking": true
+    },
+    "steps": [
+        {
+            "step": "installPlugin",
+            "pluginZipFile": {
+                "resource": "url",
+                "url": "https:\/\/downloads.wordpress.org\/plugin\/say-what.2.2.2.zip"
+            },
+            "options": {
+                "activate": true
+            }
+        },
+        {
+            "step": "writeFile",
+            "path": "\/wordpress\/sample-replacements.csv",
+            "data": {
+                "resource": "url",
+                "url": "https:\/\/raw.githubusercontent.com\/leewillis77\/say-what\/sample-replacement-branch\/sample-replacements.csv"
+            }
+        },
+        {
+            "step": "wp-cli",
+            "command": "wp say-what import \/wordpress\/sample-replacements.csv"
+        },
+        {
+            "step": "login",
+            "username": "admin",
+            "password": "password"
+        }
+    ]
+}
